@@ -1,0 +1,1 @@
+docker run -d fast-api --name postgres-app -e POSTGRES_USER=postres -e POSTGRES_DB=postres -e POSTGRES_PASSWORD=postres -e PGDATA=/var/lib/postgresql/data/pgdata -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
