@@ -3,16 +3,6 @@ from sqlalchemy.orm import validates, relationship
 import re
 from .db import Base
 
-# Связь для М2М
-# client_tag = Table('clients_tags', Base.metadata,
-#                    Column('client_id', ForeignKey('clients.id'), primary_key=True),
-#                    Column('tag_id', ForeignKey('tags.id'), primary_key=True)
-#                    )
-class Client_Tag(Base):
-    __tablename__ = "clients_tags"
-
-    client_id = Column(ForeignKey('clients.id'), primary_key=True)
-    tag_id = Column(ForeignKey('tags.id'), primary_key=True)
 
 class Client(Base):
     __tablename__ = "clients"
@@ -33,24 +23,3 @@ class Client(Base):
 
     def __repr__(self):
         return f"Client {self.id} - {self.telephone} "
-
-
-
-class Tag(Base):
-    __tablename__ = "tags"
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    description = Column(String, nullable=True)
-
-    clients = relationship("Client", secondary="clients_tags", back_populates="tags")
-
-    def __repr__(self):
-        return f"{self.name} is {self.description}"
-
-# class Messeges(Base):
-#     __tablename__ = "messeges"
-#
-#
-# class Maillings(Base):
-#     __tablename__ = "maillings"
